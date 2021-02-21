@@ -99,6 +99,8 @@ export default defineComponent({
   setup () {
     // 表单的ref
     const ruleFormRef = ref(null)
+    // 子组件的ref
+    const registerRef: any = ref(null)
     // 路由对象
     const router = useRouter()
 
@@ -197,8 +199,7 @@ export default defineComponent({
 
     // 弹出注册子组件
     const register = () => {
-      // this.$refs.registerRef.dialogVisible = true
-      console.log('register')
+      registerRef.value.dialogVisible = true
     }
 
     return {
@@ -209,7 +210,8 @@ export default defineComponent({
       changeLoginCaptchaUrl,
       handleLogin,
       register,
-      ruleFormRef
+      ruleFormRef,
+      registerRef
     }
   }
 })

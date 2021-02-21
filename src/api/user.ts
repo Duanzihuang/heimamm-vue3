@@ -8,4 +8,20 @@ const login = (data: any) => {
   })
 }
 
-export { login }
+const sendsms = (data: any) => {
+  return request({
+    url: '/sendsms',
+    method: 'POST',
+    data
+  })
+}
+
+const register = (data: any) => {
+  return request({
+    url: '/register',
+    method: 'POST',
+    data
+  })
+}
+
+export { login, sendsms, register }

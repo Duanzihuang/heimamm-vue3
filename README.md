@@ -19,16 +19,16 @@ vue2.x
 </template>
 
 <script>
-	export default {
-        methods: {
-             login () {
-      			this.$refs.ruleForm.validate(async valid => {
-        			if (!valid) return
-                	...
-                })
-      		}
-        }
-    }
+export default {
+   methods: {
+      login () {
+          this.$refs.ruleForm.validate(async valid => {
+              if (!valid) return
+              ...
+          })
+      }
+   }
+}
 </script>
 ```
 
@@ -89,4 +89,66 @@ export default defineComponent({
 })
 </script>
 ```
+
+### watch用法不一样
+
+vue2.x
+
+```vue
+<script>
+export default {
+   data() {
+     	return {
+             dialogVisible: false, // 决定是否显示
+        }  
+   },
+   watch: {
+    dialogVisible (newValue) {
+      if (!newValue) {
+        // 调用表单的清空方法（把校验也清空）
+        this.$refs.form.resetFields()
+
+        // 清空预览的图片
+        this.imageUrl = ''
+      }
+    }
+  }
+}
+</script>
+```
+
+vue3.x
+
+```vue
+<script lang="ts">
+import { defineComponent, ref, reactive } from 'vue'
+export default defineComponent({
+    setup () {
+        // 对话框显示隐藏
+    	const dialogVisible = ref(false)
+        
+        watch(dialogVisible, newValue => {
+          if (!newValue) {
+            // 调用表单的清空方法（把校验也清空）
+            ruleFormRef.value.resetFields()
+
+            // 清空预览的图片
+            imageUrl.value = ''
+          }
+        })
+    }
+})
+</script>
+```
+
+## Vue3.x 中 ref 和 reactive
+
+相同点：
+
+- ref和reactive都能实现响应式
+
+不同点：
+
+- ref适用于值类型、子组件设置ref，要给它赋值，必须通过 `xxx.value=值` 进行赋值，取值必须通过`xxx.value`获取值
+- reactive适用于引用类型
 
