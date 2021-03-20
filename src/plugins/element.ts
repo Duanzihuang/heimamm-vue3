@@ -22,7 +22,9 @@ import {
   ElTableColumn,
   ElUpload,
   ElMessage,
-  ElMessageBox
+  ElMessageBox,
+  ElHeader,
+  ElAside
 } from 'element-plus'
 
 const components = [
@@ -46,7 +48,9 @@ const components = [
   ElSelect,
   ElTable,
   ElTableColumn,
-  ElUpload
+  ElUpload,
+  ElHeader,
+  ElAside
 ]
 
 const plugins = [ElMessage, ElMessageBox]

@@ -96,6 +96,7 @@ export default defineComponent({
   components: {
     Register
   },
+  // 入口方法
   setup () {
     // 表单的ref
     const ruleFormRef = ref(null)

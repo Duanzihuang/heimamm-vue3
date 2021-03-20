@@ -24,4 +24,16 @@ const register = (data: any) => {
   })
 }
 
-export { login, sendsms, register }
+const getUseInfo = () => {
+  return request({
+    url: '/info'
+  })
+}
+
+const logout = () => {
+  return request({
+    url: 'logout'
+  })
+}
+
+export { login, sendsms, register, logout, getUseInfo }
