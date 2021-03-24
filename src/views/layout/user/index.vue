@@ -214,8 +214,8 @@ export default defineComponent({
               if (page.value === 1) return
 
               page.value--
-              getListData()
             }
+            getListData()
           }
         })
         .catch(error => {
@@ -256,7 +256,8 @@ export default defineComponent({
       del,
       add,
       edit,
-      addOrUpdateRef
+      addOrUpdateRef,
+      formRef
     }
   }
 })
