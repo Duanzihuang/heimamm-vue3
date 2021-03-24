@@ -1,4 +1,5 @@
 import 'element-plus/lib/theme-chalk/index.css'
+import lang from 'element-plus/lib/locale/lang/zh-cn'
 import {
   ElButton,
   ElCard,
@@ -24,7 +25,9 @@ import {
   ElMessage,
   ElMessageBox,
   ElHeader,
-  ElAside
+  ElAside,
+  locale,
+  ElOption
 } from 'element-plus'
 
 const components = [
@@ -50,9 +53,11 @@ const components = [
   ElTableColumn,
   ElUpload,
   ElHeader,
-  ElAside
+  ElAside,
+  ElOption
 ]
 
+locale(lang)
 const plugins = [ElMessage, ElMessageBox]
 
 export default (app: any) => {
