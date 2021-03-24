@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      :title="mode === 'add' ? '新增企业' : '编辑企业'"
+      :title="mode === 'add' ? '新增学科' : '编辑学科'"
       v-model="dialogVisible"
       width="600px"
       center
@@ -14,19 +14,19 @@
         :inline="false"
         size="normal"
       >
-        <el-form-item label="企业编号" prop="eid">
-          <el-input v-model="form.eid"></el-input>
+        <el-form-item label="学科编号" prop="rid">
+          <el-input v-model="form.rid"></el-input>
         </el-form-item>
-        <el-form-item label="企业名称" prop="name">
+        <el-form-item label="学科名称" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="企业简称" prop="short_name">
+        <el-form-item label="学科简称" prop="short_name">
           <el-input v-model="form.short_name"></el-input>
         </el-form-item>
-        <el-form-item label="企业简介" prop="intro">
+        <el-form-item label="学科简介" prop="intro">
           <el-input v-model="form.intro"></el-input>
         </el-form-item>
-        <el-form-item label="企业备注" prop="remark">
+        <el-form-item label="学科备注" prop="remark">
           <el-input v-model="form.remark"></el-input>
         </el-form-item>
       </el-form>
@@ -40,9 +40,9 @@
 
 <script lang="ts">
 import { ref, watch, getCurrentInstance } from 'vue'
-import { addEnterprise, editEnterprise } from '@/api/enterprise'
+import { addSubject, editSubject } from '@/api/subject'
 export default {
-  name: 'EnterpriseEdit',
+  name: 'SubjectEdit',
   setup () {
     const instance: any = getCurrentInstance()
 
@@ -53,7 +53,7 @@ export default {
     const mode = ref('') // mode是模型的意思，它的值有两个，一个是 add、一个是edit
 
     const form = ref({
-      eid: '',
+      rid: '',
       name: '',
       // eslint-disable-next-line
       short_name: '',
@@ -68,13 +68,13 @@ export default {
     })
 
     const rules = ref({
-      eid: [{ required: true, message: '企业编号不能为空', trigger: 'blur' }],
-      name: [{ required: true, message: '企业名称不能为空', trigger: 'blur' }],
+      rid: [{ required: true, message: '学科编号不能为空', trigger: 'blur' }],
+      name: [{ required: true, message: '学科名称不能为空', trigger: 'blur' }],
       // eslint-disable-next-line
       short_name: [
-        { required: true, message: '企业简称不能为空', trigger: 'blur' }
+        { required: true, message: '学科简称不能为空', trigger: 'blur' }
       ],
-      intro: [{ required: true, message: '企业简介不能为空', trigger: 'blur' }]
+      intro: [{ required: true, message: '学科简介不能为空', trigger: 'blur' }]
     })
 
     const submit = () => {
@@ -83,9 +83,9 @@ export default {
 
         let res: any = null
         if (mode.value === 'add') {
-          res = await addEnterprise(form.value)
+          res = await addSubject(form.value)
         } else {
-          res = await editEnterprise(form.value)
+          res = await editSubject(form.value)
         }
 
         if (res.code === 200) {
