@@ -23,7 +23,7 @@
           :collapse="isCollapse"
           router
         >
-          <el-menu-item index="/layout/chart">
+          <!-- <el-menu-item index="/layout/chart">
             <i class="el-icon-pie-chart"></i>
             <template v-slot:title>
               <span>数据预览</span>
@@ -52,6 +52,18 @@
             <template v-slot:title>
               <span>学科列表</span>
             </template>
+          </el-menu-item> -->
+          <!-- 根据元信息的配置，动态生成左侧菜单 -->
+          <el-menu-item
+            v-for="item in $router.options.routes[2].children"
+            :key="item.path"
+            :index="item.meta.path"
+            v-show="item.meta.roles.includes(userInfo.role)"
+          >
+            <i :class="item.meta.icon"></i>
+            <template #title>
+              <span>{{ item.meta.title }}</span>
+            </template>
           </el-menu-item>
         </el-menu>
       </el-aside>
@@ -66,8 +78,8 @@
 <script>
 import { removeToken } from '@/utils/token'
 import { getUseInfo, logout } from '@/api/user'
-import { onMounted, ref, getCurrentInstance } from 'vue'
-import { useRouter } from 'vue-router'
+import { onMounted, ref, getCurrentInstance, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 export default {
   setup () {
@@ -75,6 +87,7 @@ export default {
     const avatar = ref('') // 头像
     const userInfo = ref({}) // 用户信息
     const router = useRouter()
+    const route = useRoute()
     const store = useStore()
     const instance = getCurrentInstance()
 
@@ -115,6 +128,22 @@ export default {
 
     onMounted(() => {
       getUseInfoData()
+    })
+
+    watch(route, newValue => {
+      if (
+        newValue.meta.roles &&
+        !newValue.meta.roles.includes(userInfo.value.role)
+      ) {
+        instance.ctx.$message({
+          type: 'error',
+          message: '您没有权限访问该页面',
+          duration: 2000
+        })
+
+        // 调回登录页面
+        router.push('/login')
+      }
     })
 
     return {

@@ -27,7 +27,9 @@ import {
   ElHeader,
   ElAside,
   locale,
-  ElOption
+  ElOption,
+  ElDatePicker,
+  ElCascader
 } from 'element-plus'
 
 const components = [
@@ -54,7 +56,9 @@ const components = [
   ElUpload,
   ElHeader,
   ElAside,
-  ElOption
+  ElOption,
+  ElDatePicker,
+  ElCascader
 ]
 
 locale(lang)
